@@ -1,10 +1,11 @@
 package main
 
 import (
-    "net/http"
-    "log"
+  "net/http"
+  "log"
 	"github.com/gorilla/mux"
 	"fmt"
+  "time"
 )
 
 func HelloFriend(w http.ResponseWriter, r *http.Request) {
@@ -24,6 +25,13 @@ func main() {
     r.HandleFunc("/{name}", HelloFriend)
     r.HandleFunc("/", HelloWorld)
 
+    server := &http.Server{
+        Addr:           ":8000",
+        Handler:        r,
+        ReadTimeout:    5 * time.Second,
+        WriteTimeout:   5 * time.Second,
+    }
+
     // Bind to a port and pass our router in
-    log.Fatal(http.ListenAndServe(":8000", r))
+    log.Fatal(server.ListenAndServe())
 }
