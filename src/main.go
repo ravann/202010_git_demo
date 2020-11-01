@@ -4,10 +4,23 @@ import (
     "net/http"
     "log"
     "github.com/gorilla/mux"
+    "encoding/json"
 )
 
+type MessageStruct struct {
+    Message string
+}
+
 func HelloWorld(w http.ResponseWriter, r *http.Request) {
-    w.Write([]byte("Hello World!\n"))
+    msg := MessageStruct {
+        Message: "Hello World!!!",
+    }
+    b, err := json.Marshal(msg)
+    if(err != nil) {
+        w.Write([]byte("Hello World!!!"))
+    } else {
+        w.Write(b)
+    }
 }
 
 func main() {

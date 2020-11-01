@@ -18,7 +18,7 @@ create a new brach v2b
 Copy the code from main_v2b.go into main.go
 Commit and push
 
-Volunteer 3:
+Volunteer 3 - Is from Sankar:
 create a new brach v2c
 Copy the code from main_v2c.go into main.go
 Commit and push
