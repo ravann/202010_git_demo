@@ -29,7 +29,7 @@ Raise a pull request and self approve
 Volunteer 2:
 Raise a pull request and ask for approval
 
-Volunteer 3:
+Volunteer 3 Sankar:
 Raise a pull request - you will see conflicts
 Merge master with branch
 Resolve conflicts
