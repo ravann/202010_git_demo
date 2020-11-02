@@ -1,23 +1,30 @@
-// adding JSON
 package main
 
 import (
-  "net/http"
-  "log"
+    "net/http"
+    "log"
 	"github.com/gorilla/mux"
-	"fmt"
-  "time"
+    "fmt"
+    "time"
     "encoding/json"
 )
+
+type MessageStruct struct {
+    Message string
+}
 
 func HelloFriend(w http.ResponseWriter, r *http.Request) {
     vars := mux.Vars(r)
     w.WriteHeader(http.StatusOK)
-    fmt.Fprintf(w, "Hello %v!!!\n", vars["name"])
-}
-
-type MessageStruct struct {
-    Message string
+    msg := MessageStruct {
+        Message: "Hello " + vars["name"] + "!!!",
+    }
+    b, err := json.Marshal(msg)
+    if(err != nil) {
+        fmt.Fprintf(w, "Hello %v!!!\n", vars["name"])
+    } else {
+        w.Write(b)
+    }
 }
 
 func HelloWorld(w http.ResponseWriter, r *http.Request) {
@@ -25,6 +32,7 @@ func HelloWorld(w http.ResponseWriter, r *http.Request) {
         Message: "Hello World!!!",
     }
     b, err := json.Marshal(msg)
+    w.WriteHeader(http.StatusOK)
     if(err != nil) {
         w.Write([]byte("Hello World!!!"))
     } else {
